@@ -1,0 +1,11 @@
+{
+  "name": "mine-admin/md-editor",
+  "description": "Markdown 编辑器",
+  "type": "frontend",
+  "version": "1.0.0",
+  "author": [
+    {
+      "name": "mineadmin"
+    }
+  ]
+}

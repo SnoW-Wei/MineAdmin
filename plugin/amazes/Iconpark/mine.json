@@ -1,0 +1,17 @@
+{
+    "title":"iconpark",
+    "name": "amazes/Iconpark",
+    "version": "2.0.0",
+    "type": "frontend",
+    "description": "融合iconpark图标,为开发者提供多样化图标选择",
+    "author": [
+        {
+            "name": "amazes"
+        }
+    ],
+    "package": {
+        "dependencies": {
+            "@icon-park/vue-next": "^1.4.2"
+        }
+    }
+}
