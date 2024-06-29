@@ -1,0 +1,9 @@
+{
+    "name": "Park",
+    "label": "汇智虚拟园区",
+    "description": "业务功能管理后台模块，业务管理板块",
+    "installed": true,
+    "enabled": true,
+    "version": "1.0.0",
+    "order": 0
+}

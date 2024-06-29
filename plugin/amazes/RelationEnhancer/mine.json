@@ -1,0 +1,20 @@
+{
+    "name": "amazes/RelationEnhancer",
+    "version": "1.0.0",
+    "type": "backend",
+    "description": "为模型提供多样化关联方案",
+    "author": [
+        {
+            "name": "amazes"
+        }
+    ],
+    "composer": {
+        "require": [],
+        "psr-4": {
+            "Amazes\\RelationEnhancer\\": "src"
+        },
+        "installScript": "Amazes\\RelationEnhancer\\InstallScript",
+        "uninstallScript": "Amazes\\RelationEnhancer\\UninstallScript",
+        "config": "Amazes\\RelationEnhancer\\ConfigProvider"
+    }
+}
