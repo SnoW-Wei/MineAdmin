@@ -71,10 +71,14 @@ php bin/hyperf.php start
 如果想与主repo同步，先获取源码更新：
 git fetch upstream
 
-合并（大佬的开源代码更新）与（本地）
+后台 合并（大佬的开源代码更新）与（本地）
 git merge upstream/master
 
 账号密码：
 superAdmin
 admin123
+
+
+前端 合并（大佬的开源代码更新）与（本地）
+git merge upstream/main
 ```
