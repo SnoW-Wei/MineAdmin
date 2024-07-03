@@ -19,3 +19,4 @@ tests/junit.xml
 public
 *.lock
 ._*
+web/
