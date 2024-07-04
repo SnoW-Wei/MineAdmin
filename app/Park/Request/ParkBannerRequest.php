@@ -34,6 +34,10 @@ class ParkBannerRequest extends MineFormRequest
     public function saveRules(): array
     {
         return [
+            //标题 验证
+            'title' => 'required',
+            //banner图片 验证
+            'file_hash' => 'required',
 
         ];
     }
@@ -44,6 +48,10 @@ class ParkBannerRequest extends MineFormRequest
     public function updateRules(): array
     {
         return [
+            //标题 验证
+            'title' => 'required',
+            //banner图片 验证
+            'file_hash' => 'required',
 
         ];
     }
@@ -57,6 +65,8 @@ class ParkBannerRequest extends MineFormRequest
     {
         return [
             'id' => '',
+            'title' => '标题',
+            'file_hash' => 'banner图片',
 
         ];
     }

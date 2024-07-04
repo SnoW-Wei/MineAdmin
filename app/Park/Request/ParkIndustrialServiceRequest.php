@@ -14,9 +14,9 @@ namespace App\Park\Request;
 use Mine\MineFormRequest;
 
 /**
- * 图标网格验证数据类
+ * 服务内容验证数据类
  */
-class ParkIconGridRequest extends MineFormRequest
+class ParkIndustrialServiceRequest extends MineFormRequest
 {
     /**
      * 公共规则
@@ -34,12 +34,18 @@ class ParkIconGridRequest extends MineFormRequest
     public function saveRules(): array
     {
         return [
-            //图标名称 验证
+            //分类类型 验证
+            'category_id' => 'required',
+            //标题 验证
             'title' => 'required',
-            //图标图片 验证
-            'icon_image' => 'required',
-            //排序 验证
-            'sort' => 'required',
+            //小标题 验证
+            'subtitle' => 'required',
+            //公司名称 验证
+            'company' => 'required',
+            //列表小图 验证
+            'image' => 'required',
+            //公司介绍 验证
+            'content' => 'required',
 
         ];
     }
@@ -50,12 +56,18 @@ class ParkIconGridRequest extends MineFormRequest
     public function updateRules(): array
     {
         return [
-            //图标名称 验证
+            //分类类型 验证
+            'category_id' => 'required',
+            //标题 验证
             'title' => 'required',
-            //图标图片 验证
-            'icon_image' => 'required',
-            //排序 验证
-            'sort' => 'required',
+            //小标题 验证
+            'subtitle' => 'required',
+            //公司名称 验证
+            'company' => 'required',
+            //列表小图 验证
+            'image' => 'required',
+            //公司介绍 验证
+            'content' => 'required',
 
         ];
     }
@@ -69,9 +81,12 @@ class ParkIconGridRequest extends MineFormRequest
     {
         return [
             'id' => '',
-            'title' => '图标名称',
-            'icon_image' => '图标图片',
-            'sort' => '排序',
+            'category_id' => '分类类型',
+            'title' => '标题',
+            'subtitle' => '小标题',
+            'company' => '公司名称',
+            'image' => '列表小图',
+            'content' => '公司介绍',
 
         ];
     }

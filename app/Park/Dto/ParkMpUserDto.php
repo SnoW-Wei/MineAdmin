@@ -27,7 +27,7 @@ class ParkMpUserDto implements MineModelExcel
     public string $gender;
 
     #[ExcelProperty(value: "公司", index: 5)]
-    public string $compay_id;
+    public string $compay_name;
 
     #[ExcelProperty(value: "手机号", index: 6)]
     public string $phone;

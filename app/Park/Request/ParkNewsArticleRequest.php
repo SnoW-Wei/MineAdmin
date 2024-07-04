@@ -14,9 +14,9 @@ namespace App\Park\Request;
 use Mine\MineFormRequest;
 
 /**
- * 图标网格验证数据类
+ * 产业新闻验证数据类
  */
-class ParkIconGridRequest extends MineFormRequest
+class ParkNewsArticleRequest extends MineFormRequest
 {
     /**
      * 公共规则
@@ -34,12 +34,16 @@ class ParkIconGridRequest extends MineFormRequest
     public function saveRules(): array
     {
         return [
-            //图标名称 验证
+            //标题 验证
             'title' => 'required',
-            //图标图片 验证
-            'icon_image' => 'required',
+            //新闻内容 验证
+            'content' => 'required',
+            //发布时间 验证
+            'public_at' => 'required',
             //排序 验证
             'sort' => 'required',
+            //新闻图片 验证
+            'images' => 'required',
 
         ];
     }
@@ -50,12 +54,16 @@ class ParkIconGridRequest extends MineFormRequest
     public function updateRules(): array
     {
         return [
-            //图标名称 验证
+            //标题 验证
             'title' => 'required',
-            //图标图片 验证
-            'icon_image' => 'required',
+            //新闻内容 验证
+            'content' => 'required',
+            //发布时间 验证
+            'public_at' => 'required',
             //排序 验证
             'sort' => 'required',
+            //新闻图片 验证
+            'images' => 'required',
 
         ];
     }
@@ -69,9 +77,11 @@ class ParkIconGridRequest extends MineFormRequest
     {
         return [
             'id' => '',
-            'title' => '图标名称',
-            'icon_image' => '图标图片',
+            'title' => '标题',
+            'content' => '新闻内容',
+            'public_at' => '发布时间',
             'sort' => '排序',
+            'images' => '新闻图片',
 
         ];
     }

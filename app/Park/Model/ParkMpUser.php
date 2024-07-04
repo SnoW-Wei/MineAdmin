@@ -13,7 +13,7 @@ use Mine\MineModel;
  * @property string $nick_name 昵称
  * @property string $real_name 真实姓名
  * @property int $gender 性别
- * @property int $compay_id 公司
+ * @property string $compay_name 公司
  * @property string $phone 手机号
  * @property string $email 邮箱
  * @property string $password 密码
@@ -36,10 +36,10 @@ class ParkMpUser extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'header_image', 'nick_name', 'real_name', 'gender', 'compay_id', 'phone', 'email', 'password', 'mp_open_id', 'xcx_open_id', 'union_open_id', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'header_image', 'nick_name', 'real_name', 'gender', 'compay_name', 'phone', 'email', 'password', 'mp_open_id', 'xcx_open_id', 'union_open_id', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'gender' => 'integer', 'compay_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'gender' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

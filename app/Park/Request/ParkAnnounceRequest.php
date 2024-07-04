@@ -34,6 +34,14 @@ class ParkAnnounceRequest extends MineFormRequest
     public function saveRules(): array
     {
         return [
+            //公告标题 验证
+            'title' => 'required',
+            //公告内容 验证
+            'content' => 'required',
+            //发布时间 验证
+            'sub_date' => 'required',
+            //公告类型 验证
+            'type' => 'required',
 
         ];
     }
@@ -44,6 +52,14 @@ class ParkAnnounceRequest extends MineFormRequest
     public function updateRules(): array
     {
         return [
+            //公告标题 验证
+            'title' => 'required',
+            //公告内容 验证
+            'content' => 'required',
+            //发布时间 验证
+            'sub_date' => 'required',
+            //公告类型 验证
+            'type' => 'required',
 
         ];
     }
@@ -57,6 +73,10 @@ class ParkAnnounceRequest extends MineFormRequest
     {
         return [
             'id' => '',
+            'title' => '公告标题',
+            'content' => '公告内容',
+            'sub_date' => '发布时间',
+            'type' => '公告类型',
 
         ];
     }

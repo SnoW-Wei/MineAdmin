@@ -12,23 +12,23 @@ declare(strict_types=1);
 
 namespace App\Park\Mapper;
 
-use App\Park\Model\ParkMpUser;
+use App\Park\Model\ParkIndustrialServiceApply;
 use Hyperf\Database\Model\Builder;
 use Mine\Abstracts\AbstractMapper;
 
 /**
- * 小程序用户Mapper类
+ * 服务申请Mapper类
  */
-class ParkMpUserMapper extends AbstractMapper
+class ParkIndustrialServiceApplyMapper extends AbstractMapper
 {
     /**
-     * @var ParkMpUser
+     * @var ParkIndustrialServiceApply
      */
     public $model;
 
     public function assignModel()
     {
-        $this->model = ParkMpUser::class;
+        $this->model = ParkIndustrialServiceApply::class;
     }
 
     /**
@@ -45,59 +45,44 @@ class ParkMpUserMapper extends AbstractMapper
             $query->where('id', '=', $params['id']);
         }
 
-        // 头像
-        if (isset($params['header_image']) && filled($params['header_image'])) {
-            $query->where('header_image', '=', $params['header_image']);
+        // 产业服务ID
+        if (isset($params['service_id']) && filled($params['service_id'])) {
+            $query->where('service_id', '=', $params['service_id']);
         }
 
-        // 昵称
-        if (isset($params['nick_name']) && filled($params['nick_name'])) {
-            $query->where('nick_name', 'like', '%'.$params['nick_name'].'%');
+        // 用户ID
+        if (isset($params['user_id']) && filled($params['user_id'])) {
+            $query->where('user_id', '=', $params['user_id']);
         }
 
-        // 真实姓名
-        if (isset($params['real_name']) && filled($params['real_name'])) {
-            $query->where('real_name', 'like', '%'.$params['real_name'].'%');
+        // 用户名称
+        if (isset($params['user_name']) && filled($params['user_name'])) {
+            $query->where('user_name', 'like', '%'.$params['user_name'].'%');
         }
 
-        // 性别
-        if (isset($params['gender']) && filled($params['gender'])) {
-            $query->where('gender', '=', $params['gender']);
-        }
-
-        // 公司
-        if (isset($params['compay_name']) && filled($params['compay_name'])) {
-            $query->where('compay_name', 'like', '%'.$params['compay_name'].'%');
-        }
-
-        // 手机号
+        // 电话
         if (isset($params['phone']) && filled($params['phone'])) {
             $query->where('phone', '=', $params['phone']);
         }
 
-        // 邮箱
+        // 电子邮箱
         if (isset($params['email']) && filled($params['email'])) {
             $query->where('email', 'like', '%'.$params['email'].'%');
         }
 
-        // 密码
-        if (isset($params['password']) && filled($params['password'])) {
-            $query->where('password', 'like', '%'.$params['password'].'%');
+        // 公司
+        if (isset($params['compay']) && filled($params['compay'])) {
+            $query->where('compay', 'like', '%'.$params['compay'].'%');
         }
 
-        // 公众号OpenID
-        if (isset($params['mp_open_id']) && filled($params['mp_open_id'])) {
-            $query->where('mp_open_id', 'like', '%'.$params['mp_open_id'].'%');
+        // 备注
+        if (isset($params['remark']) && filled($params['remark'])) {
+            $query->where('remark', '=', $params['remark']);
         }
 
-        // 小程序OpenID
-        if (isset($params['xcx_open_id']) && filled($params['xcx_open_id'])) {
-            $query->where('xcx_open_id', 'like', '%'.$params['xcx_open_id'].'%');
-        }
-
-        // 公众号和小程序联合ID
-        if (isset($params['union_open_id']) && filled($params['union_open_id'])) {
-            $query->where('union_open_id', 'like', '%'.$params['union_open_id'].'%');
+        // 审核状态
+        if (isset($params['status']) && filled($params['status'])) {
+            $query->where('status', '=', $params['status']);
         }
 
         // 创建时间
