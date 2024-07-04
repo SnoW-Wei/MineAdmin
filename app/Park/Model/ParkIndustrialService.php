@@ -20,6 +20,7 @@ use Mine\MineModel;
  * @property \Carbon\Carbon $created_at 创建时间
  * @property \Carbon\Carbon $updated_at 更新时间
  * @property string $deleted_at 删除时间
+ * @property-read null|\App\Park\Model\ParkIndustrialServiceCategory $category
  */
 class ParkIndustrialService extends MineModel
 {
