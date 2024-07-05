@@ -36,5 +36,5 @@ class ParkNewsArticle extends MineModel
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'sort' => 'integer','images'=>'json', 'created_by' => 'integer', 'update_by' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'sort' => 'integer','images'=>'array', 'created_by' => 'integer', 'update_by' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
