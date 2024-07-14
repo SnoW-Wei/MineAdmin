@@ -7,6 +7,8 @@ use Api\ParkApi\v1\Model\MpUser;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
 use Mine\Abstracts\AbstractMapper;
+use Mine\Annotation\Transaction;
+
 class MpUserMapper extends AbstractMapper
 {
     public $model;
@@ -59,6 +61,19 @@ class MpUserMapper extends AbstractMapper
     }
 
     /**
+     * 初始化用户密码
+     */
+    public function initUserPassword(int $id, string $password): bool
+    {
+        $model = $this->model::find($id);
+        if ($model) {
+            $model->password = $password;
+            return $model->save();
+        }
+        return false;
+    }
+
+    /**
      * 根据用户ID列表获取用户基础信息.
      */
     public function getUserInfoByIds(array $ids, ?array $select = null): array
@@ -67,5 +82,18 @@ class MpUserMapper extends AbstractMapper
             $select = ['id','header_image','real_name', 'nick_name', 'phone', 'email', 'created_at'];
         }
         return $this->model::query()->whereIn('id', $ids)->select($select)->get()->toArray();
+    }
+
+    /**
+     * 更新用户.
+     */
+    #[Transaction]
+    public function update(mixed $id, array $data): bool
+    {
+        $result = parent::update($id, $data);
+        if ($result) {
+            return true;
+        }
+        return false;
     }
 }

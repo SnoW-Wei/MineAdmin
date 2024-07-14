@@ -18,4 +18,33 @@ class MpUserRequest extends MineFormRequest
             'password' => 'required|min:6',
         ];
     }
+
+    /**
+     * 修改密码验证规则
+     * return array.
+     */
+    public function modifyPasswordRules(): array
+    {
+        return [
+            'newPassword' => 'required|max:20|min:6',
+        ];
+    }
+
+    /**
+     * 字段映射名称
+     * return array.
+     */
+    public function attributes(): array
+    {
+        return [
+            'id' => '用户ID',
+            'header_image' => '头像',
+            'nick_name' => '昵称',
+            'gender' => '性别',
+            'real_name' => '真实名称',
+            'compay_name' => '公司名称',
+            'phone' => '手机',
+            'email' => '邮箱',
+        ];
+    }
 }

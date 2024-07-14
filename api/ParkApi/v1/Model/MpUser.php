@@ -16,15 +16,19 @@ class MpUser extends MineModel
     protected ?string $table = 'park_mp_user';
 
     /**
+     * 隐藏的字段列表.
+     * @var string[]
+     */
+    protected array $hidden = ['password', 'deleted_at'];
+    /**
      * The attributes that are mass assignable.
      */
-    // protected array $fillable = ['id', 'username', 'password', 'user_type', 'nickname', 'phone', 'email', 'avatar', 'signed', 'dashboard', 'status', 'login_ip', 'login_time', 'backend_setting', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at', 'remark'];
+    protected array $fillable = ['id', 'header_image', 'nick_name', 'real_name', 'gender', 'compay_name', 'phone', 'email', 'password', 'mp_open_id', 'xcx_open_id', 'union_open_id', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    // protected array $casts = ['id' => 'integer', 'status' => 'integer', 'created_by' => 'integer', 'updated_by' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'backend_setting' => 'json'];
-
+    protected array $casts = ['id' => 'integer', 'gender' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     /**
      * 密码加密.

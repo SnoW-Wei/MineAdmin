@@ -8,7 +8,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Mine\MineModel;
 
 /**
- * @property int $id 
+ * @property int $id
  * @property string $header_image 头像
  * @property string $nick_name 昵称
  * @property string $real_name 真实姓名
@@ -32,6 +32,12 @@ class ParkMpUser extends MineModel
      * The table associated with the model.
      */
     protected ?string $table = 'park_mp_user';
+
+    /**
+     * 隐藏的字段列表.
+     * @var string[]
+     */
+    protected array $hidden = ['password', 'deleted_at'];
 
     /**
      * The attributes that are mass assignable.

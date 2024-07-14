@@ -43,7 +43,7 @@ class MpUserService extends AbstractService implements UserServiceInterface
      */
     public function getInfo(?int $userId = null): array
     {
-        if ($uid = (is_null($userId) ? user()->getId() : $userId)) {
+        if ($uid = (is_null($userId) ? user('xcx')->getId() : $userId)) {
             return $this->getCacheInfo($uid);
         }
         throw new MineException(t('system.unable_get_userinfo'), 500);
@@ -71,13 +71,18 @@ class MpUserService extends AbstractService implements UserServiceInterface
     #[CacheEvict(prefix: 'MpLoginInfo', value: 'userId_#{id}')]
     public function update(mixed $id, array $data): bool
     {
-
         if (isset($data['password'])) {
-            // 密码加密 todo
-
+            unset($data['password']);
         }
-
         return $this->mapper->update($id, $data);
+    }
+
+    /**
+     * 用户修改密码
+     */
+    public function modifyPassword(array $params): bool
+    {
+        return $this->mapper->initUserPassword(user('xcx')->getId(), $params['newPassword']);
     }
 
     /**
