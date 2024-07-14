@@ -42,7 +42,7 @@ class SystemLoginLog extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'username', 'ip', 'ip_location', 'os', 'browser', 'status', 'message', 'login_time', 'remark'];
+    protected array $fillable = ['id', 'username', 'ip', 'ip_location', 'os', 'browser', 'status', 'message', 'login_time', 'remark','scene'];
 
     /**
      * The attributes that should be cast to native types.

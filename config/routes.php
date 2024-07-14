@@ -13,7 +13,7 @@ use App\System\Middleware\WsAuthMiddleware;
 use Hyperf\HttpServer\Router\Router;
 
 Router::get('/', function () {
-    return 'welcome use mineAdmin';
+    return '欢迎来到汇智虚拟园区！';
 });
 
 Router::get('/favicon.ico', function () {

@@ -51,7 +51,7 @@ class LoginListener implements ListenerInterface
         $agent = $request->getHeader('user-agent')[0] ?? 'unknown';
         $ip = $request->ip();
         $service->save([
-            'username' => $event->userinfo['username'],
+            'username' => isset($event->userinfo['username'])? $event->userinfo['username']:$event->userinfo['nick_name'],
             'ip' => $ip,
             'ip_location' => Str::ipToRegion($ip),
             'os' => $this->os($agent),
@@ -59,6 +59,7 @@ class LoginListener implements ListenerInterface
             'status' => $event->loginStatus ? SystemLoginLog::SUCCESS : SystemLoginLog::FAIL,
             'message' => $event->message,
             'login_time' => date('Y-m-d H:i:s'),
+            'scene' => $event->userinfo['scene']
         ]);
 
         if ($event->loginStatus && $event->token) {

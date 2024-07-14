@@ -47,6 +47,7 @@ class UserAuthService implements UserServiceInterface
             event(new UserLoginBefore(['username' => $userServiceVo->getUsername(), 'password' => $userServiceVo->getPassword()]));
             $userinfo = $mapper->checkUserByUsername($userServiceVo->getUsername())->toArray();
             $password = $userinfo['password'];
+            $userinfo['scene'] = 'admin';
             unset($userinfo['password']);
             $userLoginAfter = new UserLoginAfter($userinfo);
             if ($mapper->checkPass($userServiceVo->getPassword(), $password)) {
