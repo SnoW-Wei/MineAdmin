@@ -50,6 +50,11 @@ class ParkMeetingRoomApplyMapper extends AbstractMapper
             $query->where('pay_order', 'like', '%'.$params['pay_order'].'%');
         }
 
+        // 微信支付单号
+        if (isset($params['wechat_pay_order']) && filled($params['wechat_pay_order'])) {
+            $query->where('wechat_pay_order', 'like', '%'.$params['wechat_pay_order'].'%');
+        }
+
         // 支付时间
         if (isset($params['pay_time']) && filled($params['pay_time']) && is_array($params['pay_time']) && count($params['pay_time']) == 2) {
             $query->whereBetween(
@@ -68,9 +73,19 @@ class ParkMeetingRoomApplyMapper extends AbstractMapper
             $query->where('user_id', '=', $params['user_id']);
         }
 
+        // 支付基础金额
+        if (isset($params['pay_price']) && filled($params['pay_price'])) {
+            $query->where('pay_price', '=', $params['pay_price']);
+        }
+
         // 申请人姓名
         if (isset($params['apply_name']) && filled($params['apply_name'])) {
             $query->where('apply_name', 'like', '%'.$params['apply_name'].'%');
+        }
+
+        // 申请人公司
+        if (isset($params['apply_company']) && filled($params['apply_company'])) {
+            $query->where('apply_company', 'like', '%'.$params['apply_company'].'%');
         }
 
         // 申请人电话
@@ -103,9 +118,9 @@ class ParkMeetingRoomApplyMapper extends AbstractMapper
             $query->where('image', '=', $params['image']);
         }
 
-        // 基础服务套餐
-        if (isset($params['base_option']) && filled($params['base_option'])) {
-            $query->where('base_option', '=', $params['base_option']);
+        // 申请类型
+        if (isset($params['apply_type']) && filled($params['apply_type'])) {
+            $query->where('apply_type', '=', $params['apply_type']);
         }
 
         // 铂金服务套餐

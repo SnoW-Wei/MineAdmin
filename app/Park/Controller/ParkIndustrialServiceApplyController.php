@@ -84,6 +84,22 @@ class ParkIndustrialServiceApplyController extends MineController
         return $this->success($this->service->read($id));
     }
 
+    /**
+     * 更改数据状态
+     * @return ResponseInterface
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    #[PutMapping("changeStatus"), Permission("park:industrialServiceApply:update"), OperationLog]
+    public function changeStatus(): ResponseInterface
+    {
+        return $this->service->changeStatus(
+            (int) $this->request->input('setting_generate_tables.id'),
+            (string) $this->request->input('statusValue'),
+            (string) $this->request->input('statusName', 'status')
+        ) ? $this->success() : $this->error();
+    }
+
 
     /**
      * 远程万能通用列表接口

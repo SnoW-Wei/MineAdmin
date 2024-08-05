@@ -10,6 +10,7 @@ use Mine\MineModel;
 /**
  * @property int $id
  * @property int $service_id 产业服务ID
+ * @property int $category_id 申请类型
  * @property int $user_id 用户ID
  * @property string $user_name 用户名称
  * @property string $phone 电话
@@ -33,12 +34,12 @@ class ParkIndustrialServiceApply extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'service_id', 'user_id', 'user_name', 'phone', 'email', 'compay', 'remark', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'service_id', 'category_id', 'user_id', 'user_name', 'phone', 'email', 'compay', 'remark', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'service_id' => 'integer', 'user_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'service_id' => 'integer', 'category_id' => 'integer', 'user_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
 
     /**
@@ -49,5 +50,4 @@ class ParkIndustrialServiceApply extends MineModel
     {
         return $this->hasOne(\App\Park\Model\ParkIndustrialService::class, 'id', 'service_id');
     }
-
 }

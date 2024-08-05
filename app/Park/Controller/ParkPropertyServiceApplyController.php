@@ -86,6 +86,20 @@ class ParkPropertyServiceApplyController extends MineController
         return $this->success($this->service->read($id));
     }
 
+    /**
+     * 更新
+     * @param int $id
+     * @param ParkPropertyServiceApplyRequest $request
+     * @return ResponseInterface
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    #[PutMapping("update/{id}"), Permission("park:propertyServiceApply:update"), OperationLog]
+    public function update(int $id, ParkPropertyServiceApplyRequest $request): ResponseInterface
+    {
+        return $this->service->update($id, $request->all()) ? $this->success() : $this->error();
+    }
+
 
     /**
      * 远程万能通用列表接口

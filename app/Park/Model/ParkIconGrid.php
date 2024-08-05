@@ -11,6 +11,7 @@ use Mine\MineModel;
  * @property int $id 
  * @property string $title 图标名称
  * @property string $icon_image 图标图片
+ * @property string $code 标识
  * @property string $url 跳转地址
  * @property int $sort 排序
  * @property int $created_by 创建者
@@ -30,7 +31,7 @@ class ParkIconGrid extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'title', 'icon_image', 'url', 'sort', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'title', 'icon_image', 'code', 'url', 'sort', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

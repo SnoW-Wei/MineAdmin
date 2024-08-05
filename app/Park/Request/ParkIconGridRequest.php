@@ -38,6 +38,8 @@ class ParkIconGridRequest extends MineFormRequest
             'title' => 'required',
             //图标图片 验证
             'icon_image' => 'required',
+            //标识 验证
+            'code' => 'required',
             //排序 验证
             'sort' => 'required',
 
@@ -54,6 +56,8 @@ class ParkIconGridRequest extends MineFormRequest
             'title' => 'required',
             //图标图片 验证
             'icon_image' => 'required',
+            //标识 验证
+            'code' => 'required',
             //排序 验证
             'sort' => 'required',
 
@@ -71,6 +75,7 @@ class ParkIconGridRequest extends MineFormRequest
             'id' => '',
             'title' => '图标名称',
             'icon_image' => '图标图片',
+            'code' => '标识',
             'sort' => '排序',
 
         ];

@@ -82,11 +82,11 @@ class LoginController extends BaseController
 
         $utils = $app->getUtils();
         $userinfo = $utils->codeToSession($request->code);
-        $session = $utils->decryptSession($userinfo['sessionKey'], $request->iv, $request->encryptedData);
+        // $session = $utils->decryptSession($userinfo['sessionKey'], $request->iv, $request->encryptedData);
 
         //todo
         // 创建账号
         // 获取账号登陆
-        return $this->success($session);
+        return $this->success($userinfo);
     }
 }

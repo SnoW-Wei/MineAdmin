@@ -57,11 +57,10 @@ class ParkIndustrialServiceApplyRequest extends MineFormRequest
     {
         return [
             'id' => '',
-            'service_id' => '产业服务ID',
+            'category_id' => '申请类型',
             'user_id' => '用户ID',
             'user_name' => '用户名称',
             'phone' => '电话',
-            'email' => '电子邮箱',
 
         ];
     }

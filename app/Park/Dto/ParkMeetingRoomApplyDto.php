@@ -17,49 +17,58 @@ class ParkMeetingRoomApplyDto implements MineModelExcel
     #[ExcelProperty(value: "支付单号", index: 1)]
     public string $pay_order;
 
-    #[ExcelProperty(value: "支付时间", index: 2)]
+    #[ExcelProperty(value: "微信支付单号", index: 2)]
+    public string $wechat_pay_order;
+
+    #[ExcelProperty(value: "支付时间", index: 3)]
     public string $pay_time;
 
-    #[ExcelProperty(value: "支付状态", index: 3)]
+    #[ExcelProperty(value: "支付状态", index: 4)]
     public string $pay_status;
 
-    #[ExcelProperty(value: "申请帐号", index: 4)]
+    #[ExcelProperty(value: "申请帐号", index: 5)]
     public string $user_id;
 
-    #[ExcelProperty(value: "申请人姓名", index: 5)]
+    #[ExcelProperty(value: "支付基础金额", index: 6)]
+    public string $pay_price;
+
+    #[ExcelProperty(value: "申请人姓名", index: 7)]
     public string $apply_name;
 
-    #[ExcelProperty(value: "申请人电话", index: 6)]
+    #[ExcelProperty(value: "申请人公司", index: 8)]
+    public string $apply_company;
+
+    #[ExcelProperty(value: "申请人电话", index: 9)]
     public string $apply_phone;
 
-    #[ExcelProperty(value: "申请时段", index: 7)]
+    #[ExcelProperty(value: "申请时段", index: 10)]
     public string $apply_time_period;
 
-    #[ExcelProperty(value: "会议室编号", index: 8)]
+    #[ExcelProperty(value: "会议室编号", index: 11)]
     public string $room_id;
 
-    #[ExcelProperty(value: "支付类型", index: 9)]
+    #[ExcelProperty(value: "支付类型", index: 12)]
     public string $pay_type;
 
-    #[ExcelProperty(value: "审核状态", index: 10)]
+    #[ExcelProperty(value: "审核状态", index: 13)]
     public string $status;
 
-    #[ExcelProperty(value: "企业支付截图", index: 11)]
+    #[ExcelProperty(value: "企业支付截图", index: 14)]
     public string $image;
 
-    #[ExcelProperty(value: "基础服务套餐", index: 12)]
-    public string $base_option;
+    #[ExcelProperty(value: "申请类型", index: 15)]
+    public string $apply_type;
 
-    #[ExcelProperty(value: "铂金服务套餐", index: 13)]
+    #[ExcelProperty(value: "铂金服务套餐", index: 16)]
     public string $platinum_option;
 
-    #[ExcelProperty(value: "创建时间", index: 14)]
+    #[ExcelProperty(value: "创建时间", index: 17)]
     public string $created_at;
 
-    #[ExcelProperty(value: "更新时间", index: 15)]
+    #[ExcelProperty(value: "更新时间", index: 18)]
     public string $updated_at;
 
-    #[ExcelProperty(value: "删除时间", index: 16)]
+    #[ExcelProperty(value: "删除时间", index: 19)]
     public string $deleted_at;
 
 

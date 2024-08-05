@@ -57,7 +57,7 @@ class ParkPropertyReleaseApplyMapper extends AbstractMapper
 
         // 联系电话
         if (isset($params['phone']) && filled($params['phone'])) {
-            $query->where('phone', '=', $params['phone']);
+            $query->where('phone', 'like', '%'.$params['phone'].'%');
         }
 
         // 公司名称
@@ -80,11 +80,6 @@ class ParkPropertyReleaseApplyMapper extends AbstractMapper
             $query->where('goods_desc', 'like', '%'.$params['goods_desc'].'%');
         }
 
-        // 车牌号
-        if (isset($params['car_no']) && filled($params['car_no'])) {
-            $query->where('car_no', 'like', '%'.$params['car_no'].'%');
-        }
-
         // 生成二维码
         if (isset($params['apply_image']) && filled($params['apply_image'])) {
             $query->where('apply_image', '=', $params['apply_image']);
@@ -95,12 +90,22 @@ class ParkPropertyReleaseApplyMapper extends AbstractMapper
             $query->where('apply_status', '=', $params['apply_status']);
         }
 
-        // 申请时间
-        if (isset($params['apply_at']) && filled($params['apply_at']) && is_array($params['apply_at']) && count($params['apply_at']) == 2) {
+        // 申请日期
+        if (isset($params['apply_date']) && filled($params['apply_date']) && is_array($params['apply_date']) && count($params['apply_date']) == 2) {
             $query->whereBetween(
-                'apply_at',
-                [ $params['apply_at'][0], $params['apply_at'][1] ]
+                'apply_date',
+                [ $params['apply_date'][0], $params['apply_date'][1] ]
             );
+        }
+
+        // 开始时间
+        if (isset($params['apply_start_at']) && filled($params['apply_start_at'])) {
+            $query->where('apply_start_at', '=', $params['apply_start_at']);
+        }
+
+        // 结束时间
+        if (isset($params['apply_end_at']) && filled($params['apply_end_at'])) {
+            $query->where('apply_end_at', '=', $params['apply_end_at']);
         }
 
         // 审核人

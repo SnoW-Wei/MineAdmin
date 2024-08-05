@@ -1,15 +1,5 @@
 <?php
 declare(strict_types=1);
-/**
- * MineAdmin is committed to providing solutions for quickly building web applications
- * Please view the LICENSE file that was distributed with this source code,
- * For the full copyright and license information.
- * Thank you very much for using MineAdmin.
- *
- * @Author X.Mo<root@imoi.cn>
- * @Link   https://gitee.com/xmo/MineAdmin
- */
-
 namespace App\Park\Mapper;
 
 use App\Park\Model\ParkIndustrialServiceApply;
@@ -39,8 +29,8 @@ class ParkIndustrialServiceApplyMapper extends AbstractMapper
      */
     public function handleSearch(Builder $query, array $params): Builder
     {
-        
-        // 
+
+        //
         if (isset($params['id']) && filled($params['id'])) {
             $query->where('id', '=', $params['id']);
         }
@@ -48,6 +38,11 @@ class ParkIndustrialServiceApplyMapper extends AbstractMapper
         // 产业服务ID
         if (isset($params['service_id']) && filled($params['service_id'])) {
             $query->where('service_id', '=', $params['service_id']);
+        }
+
+        // 申请类型
+        if (isset($params['category_id']) && filled($params['category_id'])) {
+            $query->where('category_id', '=', $params['category_id']);
         }
 
         // 用户ID

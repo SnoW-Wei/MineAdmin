@@ -55,6 +55,11 @@ class ParkIconGridMapper extends AbstractMapper
             $query->where('icon_image', '=', $params['icon_image']);
         }
 
+        // 标识
+        if (isset($params['code']) && filled($params['code'])) {
+            $query->where('code', 'like', '%'.$params['code'].'%');
+        }
+
         // 跳转地址
         if (isset($params['url']) && filled($params['url'])) {
             $query->where('url', 'like', '%'.$params['url'].'%');

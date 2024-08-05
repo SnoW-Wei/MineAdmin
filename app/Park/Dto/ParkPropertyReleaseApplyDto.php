@@ -35,34 +35,37 @@ class ParkPropertyReleaseApplyDto implements MineModelExcel
     #[ExcelProperty(value: "物品描述", index: 7)]
     public string $goods_desc;
 
-    #[ExcelProperty(value: "车牌号", index: 8)]
-    public string $car_no;
-
-    #[ExcelProperty(value: "生成二维码", index: 9)]
+    #[ExcelProperty(value: "生成二维码", index: 8)]
     public string $apply_image;
 
-    #[ExcelProperty(value: "申请状态", index: 10)]
+    #[ExcelProperty(value: "申请状态", index: 9)]
     public string $apply_status;
 
-    #[ExcelProperty(value: "申请时间", index: 11)]
-    public string $apply_at;
+    #[ExcelProperty(value: "申请日期", index: 10)]
+    public string $apply_date;
 
-    #[ExcelProperty(value: "审核人", index: 12)]
+    #[ExcelProperty(value: "开始时间", index: 11)]
+    public string $apply_start_at;
+
+    #[ExcelProperty(value: "结束时间", index: 12)]
+    public string $apply_end_at;
+
+    #[ExcelProperty(value: "审核人", index: 13)]
     public string $audit_user_id;
 
-    #[ExcelProperty(value: "放行时间", index: 13)]
+    #[ExcelProperty(value: "放行时间", index: 14)]
     public string $release_at;
 
-    #[ExcelProperty(value: "附件", index: 14)]
+    #[ExcelProperty(value: "附件", index: 15)]
     public string $file;
 
-    #[ExcelProperty(value: "created_at", index: 15)]
+    #[ExcelProperty(value: "created_at", index: 16)]
     public string $created_at;
 
-    #[ExcelProperty(value: "updated_at", index: 16)]
+    #[ExcelProperty(value: "updated_at", index: 17)]
     public string $updated_at;
 
-    #[ExcelProperty(value: "deleted_at", index: 17)]
+    #[ExcelProperty(value: "deleted_at", index: 18)]
     public string $deleted_at;
 
 

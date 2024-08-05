@@ -63,12 +63,15 @@ class ParkMeetingRoomApplyRequest extends MineFormRequest
             'pay_time' => '支付时间',
             'pay_status' => '支付状态',
             'user_id' => '申请帐号',
+            'pay_price' => '支付基础金额',
             'apply_name' => '申请人姓名',
+            'apply_company' => '申请人公司',
             'apply_phone' => '申请人电话',
             'apply_time_period' => '申请时段',
             'room_id' => '会议室编号',
             'pay_type' => '支付类型',
             'status' => '审核状态',
+            'apply_type' => '申请类型',
 
         ];
     }

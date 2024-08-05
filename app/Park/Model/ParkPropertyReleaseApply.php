@@ -16,10 +16,11 @@ use Mine\MineModel;
  * @property string $floor 房间号
  * @property int $goods_type 物品类型
  * @property string $goods_desc 物品描述
- * @property string $car_no 车牌号
  * @property string $apply_image 生成二维码
  * @property int $apply_status 申请状态
- * @property string $apply_at 申请时间
+ * @property string $apply_date 申请日期
+ * @property string $apply_start_at 开始时间
+ * @property string $apply_end_at 结束时间
  * @property int $audit_user_id 审核人
  * @property string $release_at 放行时间
  * @property string $file 附件
@@ -39,7 +40,7 @@ class ParkPropertyReleaseApply extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'user_id', 'user_name', 'phone', 'company', 'floor', 'goods_type', 'goods_desc', 'car_no', 'apply_image', 'apply_status', 'apply_at', 'audit_user_id', 'release_at', 'file', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'user_id', 'user_name', 'phone', 'company', 'floor', 'goods_type', 'goods_desc', 'apply_image', 'apply_status', 'apply_date', 'apply_start_at', 'apply_end_at', 'audit_user_id', 'release_at', 'file', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
