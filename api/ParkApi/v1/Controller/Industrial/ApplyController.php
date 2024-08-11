@@ -8,6 +8,7 @@ use Api\ParkApi\v1\Request\IndustrialRequest;
 use Api\ParkApi\v1\Service\IndustrialService;
 use Hyperf\HttpServer\Annotation\PostMapping;
 use Hyperf\HttpServer\Annotation\GetMapping;
+use Hyperf\HttpServer\Annotation\PutMapping;
 
 use Mine\Annotation\Auth;
 use Hyperf\Di\Annotation\Inject;
@@ -26,6 +27,17 @@ class ApplyController extends BaseController
     public function apply(IndustrialRequest $request): ResponseInterface
     {
         return $this->success(['id' => $this->industrialService->save($request->all())]);
+    }
+
+    /**
+     * 产业服务修改.
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    #[PutMapping('Industrial/update/{id}')]
+    public function update(int $id, IndustrialRequest $request): ResponseInterface
+    {
+        return $this->industrialService->update($id, $request->all()) ? $this->success() : $this->error();
     }
 
     /**

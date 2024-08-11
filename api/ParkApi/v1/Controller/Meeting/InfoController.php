@@ -57,6 +57,6 @@ class InfoController extends BaseController
     #[GetMapping('meeting/base_fee')]
     public function baseFee(MeetingApplyRequest $request) : ResponseInterface
     {
-        return $this->success($this->meetingPriceService->getPageList($request->all()));
+        return $this->success($this->meetingPriceService->getPageList($request->all(),false));
     }
 }

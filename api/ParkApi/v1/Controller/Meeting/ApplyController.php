@@ -75,6 +75,13 @@ class ApplyController extends BaseController
         return $this->success(['id' => $this->meetingApplyService->save($request->all())]);
     }
 
+    /**
+     * 会议室日历
+     * @param MeetingApplyRequest $request
+     * @return ResponseInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     #[GetMapping('meeting/calendar_apply')]
     public function calendarApply(MeetingApplyRequest $request): ResponseInterface
     {
