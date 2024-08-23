@@ -14,9 +14,9 @@ namespace App\Park\Request;
 use Mine\MineFormRequest;
 
 /**
- * 温馨服务申请验证数据类
+ * 对公账户信息验证数据类
  */
-class ParkPeopertyWarmserviceApplyRequest extends MineFormRequest
+class ParkCompanyAccountRequest extends MineFormRequest
 {
     /**
      * 公共规则
@@ -34,6 +34,16 @@ class ParkPeopertyWarmserviceApplyRequest extends MineFormRequest
     public function saveRules(): array
     {
         return [
+            //税号 验证
+            'tax_no' => 'required',
+            //单位地址 验证
+            'address' => 'required',
+            //电话 验证
+            'tel' => 'required',
+            //开户银行 验证
+            'bank_name' => 'required',
+            //银行账户 验证
+            'bank_no' => 'required',
 
         ];
     }
@@ -44,6 +54,16 @@ class ParkPeopertyWarmserviceApplyRequest extends MineFormRequest
     public function updateRules(): array
     {
         return [
+            //税号 验证
+            'tax_no' => 'required',
+            //单位地址 验证
+            'address' => 'required',
+            //电话 验证
+            'tel' => 'required',
+            //开户银行 验证
+            'bank_name' => 'required',
+            //银行账户 验证
+            'bank_no' => 'required',
 
         ];
     }
@@ -57,11 +77,11 @@ class ParkPeopertyWarmserviceApplyRequest extends MineFormRequest
     {
         return [
             'id' => '',
-            'user_id' => '用户ID',
-            'service_id' => '服务',
-            'service_type' => '服务类型',
-            'apply_num' => '申请数量',
-            'apply_date' => '申请时间',
+            'tax_no' => '税号',
+            'address' => '单位地址',
+            'tel' => '电话',
+            'bank_name' => '开户银行',
+            'bank_no' => '银行账户',
 
         ];
     }

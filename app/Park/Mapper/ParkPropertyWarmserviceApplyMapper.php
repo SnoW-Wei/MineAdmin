@@ -12,23 +12,23 @@ declare(strict_types=1);
 
 namespace App\Park\Mapper;
 
-use App\Park\Model\ParkPeopertyWarmserviceApply;
+use App\Park\Model\ParkPropertyWarmserviceApply;
 use Hyperf\Database\Model\Builder;
 use Mine\Abstracts\AbstractMapper;
 
 /**
  * 温馨服务申请Mapper类
  */
-class ParkPeopertyWarmserviceApplyMapper extends AbstractMapper
+class ParkPropertyWarmserviceApplyMapper extends AbstractMapper
 {
     /**
-     * @var ParkPeopertyWarmserviceApply
+     * @var ParkPropertyWarmserviceApply
      */
     public $model;
 
     public function assignModel()
     {
-        $this->model = ParkPeopertyWarmserviceApply::class;
+        $this->model = ParkPropertyWarmserviceApply::class;
     }
 
     /**
@@ -50,7 +50,7 @@ class ParkPeopertyWarmserviceApplyMapper extends AbstractMapper
             $query->where('user_id', '=', $params['user_id']);
         }
 
-        // 服务
+        // 服务名称
         if (isset($params['service_id']) && filled($params['service_id'])) {
             $query->where('service_id', '=', $params['service_id']);
         }
@@ -78,7 +78,7 @@ class ParkPeopertyWarmserviceApplyMapper extends AbstractMapper
             $query->where('pay_money', '=', $params['pay_money']);
         }
 
-        // 微信支付订单
+        // 支付订单号
         if (isset($params['pay_wechat_no']) && filled($params['pay_wechat_no'])) {
             $query->where('pay_wechat_no', 'like', '%'.$params['pay_wechat_no'].'%');
         }

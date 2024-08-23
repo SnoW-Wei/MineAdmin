@@ -12,20 +12,20 @@ declare(strict_types=1);
 
 namespace App\Park\Service;
 
-use App\Park\Mapper\ParkPeopertyWarmserviceApplyMapper;
+use App\Park\Mapper\ParkPropertyWarmserviceApplyMapper;
 use Mine\Abstracts\AbstractService;
 
 /**
  * 温馨服务申请服务类
  */
-class ParkPeopertyWarmserviceApplyService extends AbstractService
+class ParkPropertyWarmserviceApplyService extends AbstractService
 {
     /**
-     * @var ParkPeopertyWarmserviceApplyMapper
+     * @var ParkPropertyWarmserviceApplyMapper
      */
     public $mapper;
 
-    public function __construct(ParkPeopertyWarmserviceApplyMapper $mapper)
+    public function __construct(ParkPropertyWarmserviceApplyMapper $mapper)
     {
         $this->mapper = $mapper;
     }

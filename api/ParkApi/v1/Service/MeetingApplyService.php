@@ -29,7 +29,7 @@ class MeetingApplyService extends AbstractService
     public function getCalendarApplyList($params): array
     {
         $params['apply_type'] = 1;  // 基础服务；
-        $params['status'] = 2;  // 支付已审核；
+        $params['status'] = 2;  //已审核；
 
         if (isset($params['day']) && filled($params['day'])) {
             $params['day'] = date('Y-m-d', strtotime($params['day']));
@@ -66,7 +66,6 @@ class MeetingApplyService extends AbstractService
                 }
             }
         }
-
         return $days;
     }
 

@@ -21,13 +21,13 @@ use Mine\MineModel;
  * @property \Carbon\Carbon $updated_at 更新时间
  * @property string $deleted_at 删除时间
  */
-class ParkPeopertyWarmserviceApply extends MineModel
+class ParkPropertyWarmserviceApply extends MineModel
 {
     use SoftDeletes;
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'park_peoperty_warmservice_apply';
+    protected ?string $table = 'park_property_warmservice_apply';
 
     /**
      * The attributes that are mass assignable.
@@ -40,10 +40,10 @@ class ParkPeopertyWarmserviceApply extends MineModel
     protected array $casts = ['id' => 'integer', 'user_id' => 'integer', 'service_id' => 'integer', 'service_type' => 'integer', 'apply_num' => 'integer', 'pay_money' => 'decimal:2', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     /**
-     * 定义 warmservice_user 关联
+     * 定义 warmservice_name 关联
      * @return \Hyperf\Database\Model\Relations\hasOne
      */
-    public function warmservice_user() : \Hyperf\Database\Model\Relations\hasOne
+    public function warmservice_name() : \Hyperf\Database\Model\Relations\hasOne
     {
         return $this->hasOne(\App\Park\Model\ParkMpUser::class, 'id', 'user_id');
     }

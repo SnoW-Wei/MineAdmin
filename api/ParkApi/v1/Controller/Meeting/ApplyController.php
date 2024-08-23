@@ -25,7 +25,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 
-#[Controller(prefix: 'api/v1'), Auth('xcx')]
+#[Controller(prefix: 'api/v1')]
 class ApplyController extends BaseController
 {
     #[Inject]
@@ -36,7 +36,7 @@ class ApplyController extends BaseController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    #[GetMapping('meeting/apply')]
+    #[GetMapping('meeting/apply'),Auth('xcx')]
     public function index(MeetingApplyRequest $request): ResponseInterface
     {
         return $this->success($this->meetingApplyService->getPageList($request->all()));
@@ -47,7 +47,7 @@ class ApplyController extends BaseController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    #[GetMapping('meeting/apply/{id}')]
+    #[GetMapping('meeting/apply/{id}'),Auth('xcx')]
     public function read(int $id): ResponseInterface
     {
         return $this->success($this->meetingApplyService->read($id));
@@ -58,7 +58,7 @@ class ApplyController extends BaseController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    #[PutMapping('meeting/apply/{id}')]
+    #[PutMapping('meeting/apply/{id}'),Auth('xcx')]
     public function update(int $id, MeetingApplyRequest $request): ResponseInterface
     {
         return $this->meetingApplyService->update($id, $request->all()) ? $this->success() : $this->error();
@@ -69,7 +69,7 @@ class ApplyController extends BaseController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    #[PostMapping('meeting/apply')]
+    #[PostMapping('meeting/apply'),Auth('xcx')]
     public function apply(MeetingApplyRequest $request): ResponseInterface
     {
         return $this->success(['id' => $this->meetingApplyService->save($request->all())]);

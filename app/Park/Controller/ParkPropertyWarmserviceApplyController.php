@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace App\Park\Controller;
 
-use App\Park\Service\ParkPeopertyWarmserviceApplyService;
-use App\Park\Request\ParkPeopertyWarmserviceApplyRequest;
+use App\Park\Service\ParkPropertyWarmserviceApplyService;
+use App\Park\Request\ParkPropertyWarmserviceApplyRequest;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\DeleteMapping;
@@ -31,18 +31,18 @@ use Hyperf\HttpServer\Annotation\Middleware;
 
 /**
  * 温馨服务申请控制器
- * Class ParkPeopertyWarmserviceApplyController
+ * Class ParkPropertyWarmserviceApplyController
  */
-#[Controller(prefix: "park/peopertyWarmserviceApply"), Auth]
+#[Controller(prefix: "park/propertyWarmserviceApply"), Auth]
 #[Middleware(middleware: CheckModuleMiddleware::class)]
-class ParkPeopertyWarmserviceApplyController extends MineController
+class ParkPropertyWarmserviceApplyController extends MineController
 {
     /**
      * 业务处理服务
-     * ParkPeopertyWarmserviceApplyService
+     * ParkPropertyWarmserviceApplyService
      */
     #[Inject]
-    protected ParkPeopertyWarmserviceApplyService $service;
+    protected ParkPropertyWarmserviceApplyService $service;
 
     
     /**
@@ -51,7 +51,7 @@ class ParkPeopertyWarmserviceApplyController extends MineController
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    #[GetMapping("index"), Permission("park:peopertyWarmserviceApply, park:peopertyWarmserviceApply:index")]
+    #[GetMapping("index"), Permission("park:propertyWarmserviceApply, park:propertyWarmserviceApply:index")]
     public function index(): ResponseInterface
     {
         return $this->success($this->service->getPageList($this->request->all()));
@@ -64,7 +64,7 @@ class ParkPeopertyWarmserviceApplyController extends MineController
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    #[GetMapping("read/{id}"), Permission("park:peopertyWarmserviceApply:read")]
+    #[GetMapping("read/{id}"), Permission("park:propertyWarmserviceApply:read")]
     public function read(int $id): ResponseInterface
     {
         return $this->success($this->service->read($id));
@@ -76,7 +76,7 @@ class ParkPeopertyWarmserviceApplyController extends MineController
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    #[PutMapping("numberOperation"), Permission("park:peopertyWarmserviceApply:update"), OperationLog]
+    #[PutMapping("numberOperation"), Permission("park:propertyWarmserviceApply:update"), OperationLog]
     public function numberOperation(): ResponseInterface
     {
         return $this->service->numberOperation(
