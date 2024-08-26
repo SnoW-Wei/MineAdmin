@@ -21,8 +21,8 @@ class UserAuthService implements UserAuthServiceInterface
     {
         $mapper = container()->get(MpUserMapper::class);
         try {
-            event(new UserLoginBefore(['xcx_open_id' => $userServiceVo->getXcxopenid(), 'password' => $userServiceVo->getPassword()]));
-            $userinfo = $mapper->checkUserByOpenId($userServiceVo->getXcxopenid());
+            event(new UserLoginBefore(['phone' => $userServiceVo->getPhone(), 'password' => $userServiceVo->getPassword()]));
+            $userinfo = $mapper->checkUserByPhone($userServiceVo->getPhone());
             $userinfo->scene = 'xcx';
             $userLoginAfter = new UserLoginAfter($userinfo->toArray());
             if ($mapper->checkPass($userServiceVo->getPassword(), $userinfo->password)) {

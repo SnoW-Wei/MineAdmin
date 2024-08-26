@@ -19,12 +19,21 @@ class MpUserMapper extends AbstractMapper
     }
 
     /**
+     * 通过手机号检查用户.
+     * @return Builder|Model
+     */
+    public function checkUserByPhone($phone)
+    {
+        return $this->model::query()->where('phone', $phone)->first();
+    }
+
+    /**
      * 通过小程序OpenId检查用户.
      * @return Builder|Model
      */
     public function checkUserByOpenId(string $xcxopenId)
     {
-        return $this->model::query()->where('xcx_open_id', $xcxopenId)->firstOrFail();
+        return $this->model::query()->where('xcx_open_id', $xcxopenId)->first();
     }
 
     /**
@@ -33,6 +42,14 @@ class MpUserMapper extends AbstractMapper
     public function existsByXcxOpenId(string $xcxopenId): bool
     {
         return $this->model::query()->where('xcx_open_id', $xcxopenId)->exists();
+    }
+
+    /**
+     * 通过用户名检查是否存在.
+     */
+    public function existsByPhone($phone): bool
+    {
+        return $this->model::query()->where('phone', $phone)->exists();
     }
 
     /**

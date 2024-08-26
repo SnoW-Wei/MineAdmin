@@ -50,13 +50,39 @@ class MpUserService extends AbstractService implements UserServiceInterface
     }
 
     /**
+     * 获取用户信息.
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getInfoByPhone(?int $phone = null)
+    {
+        if ($uid = (is_null($phone) ? user('xcx')->getJwt()->getParserData()['phone'] : $phone)) {
+            return $this->mapper->checkUserByPhone($uid);
+        }
+        throw new MineException(t('system.unable_get_userinfo'), 500);
+    }
+
+    /**
+     * 通过xcxopenid获取用户信息.
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getInfoByOpenId(?string $openId = null)
+    {
+        if ($uid = (is_null($openId) ? user('xcx')->getJwt()->getParserData()['xcx_open_id'] : $openId)) {
+            return $this->mapper->checkUserByOpenId($uid);
+        }
+        throw new MineException(t('system.unable_get_userinfo'), 500);
+    }
+
+    /**
      * 新增用户.
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     public function save(array $data): mixed
     {
-        if ($this->mapper->existsByXcxOpenId($data['xcx_open_id'])) {
+        if ($this->mapper->existsByPhone($data['phone'])) {
             throw new NormalStatusException(t('system.username_exists'));
         }
         $id = $this->mapper->save($data);
@@ -92,7 +118,7 @@ class MpUserService extends AbstractService implements UserServiceInterface
     protected function getCacheInfo(int $id): array
     {
         $user = $this->mapper->getModel()->find($id);
-        $user->addHidden('deleted_at','mp_open_id','xcx_open_id','union_open_id', 'password');
+        $user->addHidden('deleted_at', 'password');
         $data['user'] = $user->toArray();
         return $data;
     }

@@ -50,8 +50,9 @@ class LoginListener implements ListenerInterface
 
         $agent = $request->getHeader('user-agent')[0] ?? 'unknown';
         $ip = $request->ip();
+        $r = $event->userinfo['real_name']??$event->userinfo['phone'];
         $service->save([
-            'username' => isset($event->userinfo['username'])? $event->userinfo['username']:$event->userinfo['nick_name'],
+            'username' => isset($event->userinfo['username'])? $event->userinfo['username']:$r,
             'ip' => $ip,
             'ip_location' => Str::ipToRegion($ip),
             'os' => $this->os($agent),

@@ -9,7 +9,7 @@ use Mine\MineModel;
 class MpUser extends MineModel
 {
     use SoftDeletes;
-
+    public bool $incrementing = false;
     /**
      * The table associated with the model.
      */

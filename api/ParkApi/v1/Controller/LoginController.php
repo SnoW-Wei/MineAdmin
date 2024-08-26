@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Api\ParkApi\v1\Controller;
 use Api\Interface\UserAuthServiceInterface;
+use Api\ParkApi\v1\Service\BaoiqiService;
 use Api\ParkApi\v1\Service\MpUserService;
 use Api\ParkApi\v1\Service\Vo\UserServiceVo;
+use EasyWeChat\Factory;
 use EasyWeChat\MiniApp\Application;
-use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-use Hyperf\Context\ApplicationContext;
+
 use Hyperf\Guzzle\CoroutineHandler;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\PostMapping;
@@ -29,6 +29,9 @@ class LoginController extends BaseController
     protected UserAuthServiceInterface $userAuthService;
     #[Inject]
     protected MpUserService $mpUserService;
+    #[Inject]
+    protected BaoiqiService $baoiqiService;
+
 
     #[PostMapping("login/in")]
     public function login(MpUserRequest $request): ResponseInterface
@@ -69,24 +72,89 @@ class LoginController extends BaseController
     #[PostMapping('login/mini')]
     public function miniProgramLogin(MpUserRequest $request): ResponseInterface
     {
-        $config = config('wechat.mini_program.default');
-        $config['http'] = config('wechat.http');
-        $container = ApplicationContext::getContainer();
-        $app = new Application($config);
-        $handler = new CoroutineHandler();
-        $config = $app['config']->get('http', []);
-        $config['handler'] = HandlerStack::create($handler);
-        $app->rebind('http_client', new Client($config));
-        $app['guzzle_handler'] = $handler;
-        $app['cache'] = $container->get(CacheInterface::class);
+        $code = $request->input('code');
 
-        $utils = $app->getUtils();
-        $userinfo = $utils->codeToSession($request->code);
-        // $session = $utils->decryptSession($userinfo['sessionKey'], $request->iv, $request->encryptedData);
+        $config = config('wechat');
+        $app = Factory::miniProgram($config);
+        $app['guzzle_handler'] = CoroutineHandler::class;
+        $userinfo = $app->auth->session($code);
 
-        //todo
-        // 创建账号
-        // 获取账号登陆
-        return $this->success($userinfo);
+        $phone = $app->phone_number->getUserPhoneNumber($code);
+        print_r($phone);
+        if(!isset($phone['phone_info']) || !array_key_exists('purePhoneNumber',$phone['phone_info'])){
+            return $this->error('获取小程序用户信息失败');
+        }
+        $phone = $phone['phone_info']['purePhoneNumber'];
+        $stuInfo = $this->mpUserService->getInfoByPhone((int)$phone);
+
+        if($stuInfo){
+            $stuInfo->updated_at = date("Y-m-d H:i:s");
+            $stuInfo->save();
+        } else {
+            $stu['phone'] = $phone;
+            $stu['password'] = PASSWORD_USER;
+            $this->mpUserService->save($stu);
+        }
+
+        $vo = new UserServiceVo();
+        $vo->setPhone($phone);
+        $vo->setPassword(PASSWORD_USER);
+        return $this->success(['token' => $this->userAuthService->login($vo)]);
+    }
+
+    /**
+     * 宝i企登陆
+     * @param MpUserRequest $request
+     * @return ResponseInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    #[PostMapping('login/baoiqi')]
+    public function baoIQi(MpUserRequest $request): ResponseInterface
+    {
+        $data_json = $request->input('data');
+        $data = json_decode($data_json,true);
+
+        $phone = $this->baoiqiService->decrypt($data['mobileAes']);
+        $username = $data['userName'];
+        $stuInfo = $this->mpUserService->getInfoByPhone((int)$phone);
+        if($stuInfo){
+            $stuInfo->real_name = $username;
+            $stuInfo->updated_at = date("Y-m-d H:i:s");
+            $stuInfo->save();
+            $phone = $stuInfo->phone;
+        } else {
+            $stu['phone'] = $phone;
+            $stu['real_name'] = $username;
+            $stu['password'] = PASSWORD_USER;
+            $this->mpUserService->save($stu);
+        }
+
+        $vo = new UserServiceVo();
+        $vo->setPhone($phone);
+        $vo->setPassword(PASSWORD_USER);
+
+        $data = ['uid'=> snowflake_id(),'token' => $this->userAuthService->login($vo)];
+        $redis = redis();
+        $redis->set($data['uid'],$data['token'],['nx','ex'=>300]);
+        return $this->success($data);
+    }
+
+    /**
+     * 宝i企中转跳转
+     * @param MpUserRequest $request
+     * @return ResponseInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws \RedisException
+     */
+    #[GetMapping('login/exchange')]
+    public function exchange(MpUserRequest $request): ResponseInterface
+    {
+        $uid = $request->input('uid');
+        $redis = redis();
+        $token = $redis->get($uid);
+
+        return $this->success(['uid'=>$uid,'token'=>$token]);
     }
 }

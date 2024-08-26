@@ -169,3 +169,92 @@ if (! function_exists('has_role')) {
         return in_array($code, $roles);
     }
 }
+
+/**
+ * curl方式的 GET 请求，传入完整的url带上参数
+ *
+ * @param string $url
+ * @param array $param
+ * @return string content
+ */
+if (!function_exists('curlGetRequest')) {
+    function curlGetRequest($url,$header=array())
+    {
+        $curl = curl_init();
+        if (stripos($url, "https://") !== FALSE) {
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        }
+
+        if(!empty($headers))
+        {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        }
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 5.00; Windows 98)');
+
+
+        $content = curl_exec($curl);
+        $status = curl_getinfo($curl);
+        curl_close($curl);
+        if (intval($status["http_code"]) == 200) {
+            return $content;
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * curl方式的 POST 请求
+ *
+ * @param string $url
+ * @param array $param
+ * @return string content
+ */
+if (!function_exists('curlPostRequest')) {
+    function curlPostRequest($url, $param, $headers=array())
+    {
+        $oCurl = curl_init();
+        if (stripos($url, "https://") !== FALSE) {
+            curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, false);
+        }
+        if (is_string($param)) {
+            $strPOST = $param;
+        } else {
+            $aPOST = array();
+            foreach ($param as $key => $val) {
+                $aPOST [] = $key . "=" . urlencode($val);
+            }
+            $strPOST = join("&", $aPOST);
+        }
+
+        curl_setopt($oCurl, CURLOPT_URL, $url);
+        if(!empty($headers))
+        {
+            curl_setopt($oCurl, CURLOPT_HTTPHEADER, $headers);
+        }
+        curl_setopt($oCurl, CURLOPT_HEADER, 0);
+        curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, 1);
+        if ($strPOST) {
+            curl_setopt($oCurl, CURLOPT_POST, 1);
+            curl_setopt($oCurl, CURLOPT_POSTFIELDS, $strPOST);
+        }
+
+        $sContent = curl_exec($oCurl);
+        $aStatus = curl_getinfo($oCurl);
+        curl_close($oCurl);
+
+
+        if (intval($aStatus ["http_code"]) == 200 || !empty($headers)) {
+            // restful 接口返回的状态码非 200
+            return $sContent;
+        } else {
+            return false;
+        }
+    }
+}

@@ -16,7 +16,7 @@
   "license": "Apache-2.0",
   "require": {
     "mineadmin/app-store": "~2.0",
-    "w7corp/easywechat": "^6.15",
+    "overtrue/wechat": "~5.0",
     "xmo/jwt-auth": "~2.0",
     "xmo/mine-core": "~2.0",
     "xmo/mine-generator": "~2.0",
@@ -64,7 +64,8 @@
     "optimize-autoloader": true,
     "sort-packages": true,
     "allow-plugins": {
-      "pestphp/pest-plugin": true
+      "pestphp/pest-plugin": true,
+      "easywechat-composer/easywechat-composer": true
     }
   },
   "extra": [],
