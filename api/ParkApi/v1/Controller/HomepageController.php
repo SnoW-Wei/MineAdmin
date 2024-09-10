@@ -66,7 +66,7 @@ class HomepageController extends  BaseController
     #[GetMapping("news/{id}")]
     public function news_read(int $id): ResponseInterface
     {
-        return $this->success($this->parkAnnounceService->read($id));
+        return $this->success($this->parkNewsArticleService->read($id));
     }
 
     /**

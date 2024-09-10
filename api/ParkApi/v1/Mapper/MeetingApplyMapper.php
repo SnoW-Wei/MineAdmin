@@ -30,7 +30,7 @@ class MeetingApplyMapper extends AbstractMapper
      */
     public function getList(?array $params = null, bool $isScope = true) : array
     {
-        $data = $this->handleSearch($this->model::query(), $params)->get()->toArray();
+        $data = $this->handleSearch($this->model::query(), $params , $isScope)->get()->toArray();
         return $data;
     }
 
@@ -71,10 +71,11 @@ class MeetingApplyMapper extends AbstractMapper
      * @param array $params
      * @return Builder
      */
-    public function handleSearch(Builder $query, array $params): Builder
+    public function handleSearch(Builder $query, array $params,  bool $isScope = true): Builder
     {
-        $query->where('user_id',user('xcx')->getId());
-
+        if($isScope) {
+            $query->where('user_id',user('xcx')->getId());
+        }
         if (isset($params['month']) && filled($params['month'])) {
             $query->where('apply_date', '<=', $params['end_month'])
                 ->where('apply_date', '>=', $params['start_month']);

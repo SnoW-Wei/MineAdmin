@@ -33,7 +33,7 @@ class MeetingApplyService extends AbstractService
 
         if (isset($params['day']) && filled($params['day'])) {
             $params['day'] = date('Y-m-d', strtotime($params['day']));
-            $data = $this->mapper->getList($params);
+            $data = $this->mapper->getList($params,false);
 
             foreach ($data as $item => $value) {
                 if (strtotime($params['day']) == strtotime($value['apply_date'])) {
@@ -47,7 +47,7 @@ class MeetingApplyService extends AbstractService
         if (isset($params['month']) && filled($params['month'])) {
             $params['start_month'] = Carbon::parse($params['month'])->startOfMonth()->toDateString();
             $params['end_month'] = Carbon::parse($params['month'])->endOfMonth()->toDateString();
-            $data = $this->mapper->getList($params);
+            $data = $this->mapper->getList($params,false);
 
             $days = [];
             foreach ($data as $item => $value) {

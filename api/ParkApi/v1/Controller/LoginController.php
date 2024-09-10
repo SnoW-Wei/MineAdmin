@@ -38,7 +38,7 @@ class LoginController extends BaseController
     {
         $requestData = $request->validated();
         $vo = new UserServiceVo();
-        $vo->setXcxopenid($requestData['xcx_open_id']);
+        $vo->setPhone($requestData['phone']);
         $vo->setPassword($requestData['password']);
         return $this->success(['token' => $this->userAuthService->login($vo)]);
     }
@@ -80,13 +80,11 @@ class LoginController extends BaseController
         $userinfo = $app->auth->session($code);
 
         $phone = $app->phone_number->getUserPhoneNumber($code);
-        print_r($phone);
         if(!isset($phone['phone_info']) || !array_key_exists('purePhoneNumber',$phone['phone_info'])){
             return $this->error('获取小程序用户信息失败');
         }
         $phone = $phone['phone_info']['purePhoneNumber'];
         $stuInfo = $this->mpUserService->getInfoByPhone((int)$phone);
-
         if($stuInfo){
             $stuInfo->updated_at = date("Y-m-d H:i:s");
             $stuInfo->save();
@@ -97,7 +95,7 @@ class LoginController extends BaseController
         }
 
         $vo = new UserServiceVo();
-        $vo->setPhone($phone);
+        $vo->setPhone((string)$phone);
         $vo->setPassword(PASSWORD_USER);
         return $this->success(['token' => $this->userAuthService->login($vo)]);
     }

@@ -50,7 +50,7 @@ class ApplyController extends BaseController
     #[GetMapping('Industrial/detail/{id}')]
     public function read(int $id):ResponseInterface
     {
-        return $this->success([$this->industrialService->read($id)]);
+        return $this->success($this->industrialService->read($id));
     }
 
     /**

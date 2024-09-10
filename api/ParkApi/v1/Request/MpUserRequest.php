@@ -14,7 +14,7 @@ class MpUserRequest extends MineFormRequest
     public function loginRules(): array
     {
         return [
-            'xcx_open_id' => 'required|max:20',
+            'phone' => 'required|max:20',
             'password' => 'required|min:6',
         ];
     }
