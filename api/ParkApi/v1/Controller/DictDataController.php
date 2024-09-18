@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Api\ParkApi\v1\Controller;
 
 use Api\ParkApi\v1\Service\SystemDictDataService;
+use Api\ParkApi\v1\Service\PropertyServiceTypeService;
+use Api\ParkApi\v1\Service\industrialCategoryService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
-use Hyperf\HttpServer\Annotation\Middleware;
-use Mine\Annotation\Auth;
-use Mine\Middlewares\CheckModuleMiddleware;
 use Mine\MineController;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -26,6 +25,11 @@ class DictDataController extends MineController
     #[Inject]
     protected SystemDictDataService $service;
 
+    #[Inject]
+    protected PropertyServiceTypeService $propertyServiceType;
+
+    #[Inject]
+    protected industrialCategoryService $industrialCategoryService;
     /**
      * 快捷查询一个字典.
      * @throws ContainerExceptionInterface
@@ -34,7 +38,26 @@ class DictDataController extends MineController
     #[GetMapping('dataDict/list')]
     public function list(): ResponseInterface
     {
-        return $this->success($this->service->getList($this->request->all()));
+        $code = $this->request->all();
+        $code_arr = explode(',',$code['code']);
+        foreach($code_arr AS $value) {
+            switch ($value)
+            {
+                case 'property_service_type':
+                    $param['select'] = 'id,name';
+                    $ret =  $this->propertyServiceType->getList($param);
+                    break;
+                case 'industrial_service_category';
+                    $param['select'] = 'id,name';
+                    $ret =  $this->industrialCategoryService->getList($param);
+                    break;
+                default:
+                    $ret = $this->service->getList(['code'=>$value]);
+                    break;
+            }
+            $return[$value] = $ret;
+        }
+        return $this->success($return);
     }
 
     /**

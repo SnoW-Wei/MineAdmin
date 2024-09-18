@@ -55,7 +55,7 @@ class PropertyReleaseApplyMapper extends AbstractMapper
         $query->where('user_id',user('xcx')->getId());
 
         if (isset($params['orderBy']) && filled($params['orderBy'])) {
-            $orderType = filled($params['orderType'])? $params['orderType']:'ASC';
+            $orderType = filled($params['orderType'])? $params['orderType']:'DESC';
             $query->orderBy($params['orderBy'],$orderType);
         }
         if (isset($params['apply_date']) && filled($params['apply_date'])) {

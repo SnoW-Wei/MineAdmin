@@ -8,7 +8,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Mine\MineModel;
 
 /**
- * @property int $id 
+ * @property int $id
  * @property int $user_id 用户ID
  * @property int $service_id 温馨服务编号
  * @property int $service_type 温馨服务类型 1 园区医疗箱 2雨伞
@@ -32,7 +32,7 @@ class ParkPropertyWarmserviceApply extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'user_id', 'service_id', 'service_type', 'apply_num', 'apply_date', 'pay_money', 'pay_wechat_no', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'user_id','user_name','user_phone','address', 'service_id', 'service_type', 'apply_num', 'apply_date', 'pay_money', 'pay_wechat_no', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

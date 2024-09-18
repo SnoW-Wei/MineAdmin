@@ -13,7 +13,9 @@ declare(strict_types=1);
 namespace Api\ParkApi\v1\Service;
 
 use Api\ParkApi\v1\Mapper\PropertyWarmserviceApplyMapper;
+use Carbon\Carbon;
 use Mine\Abstracts\AbstractService;
+use Mine\Exception\MineException;
 
 /**
  * 温馨服务申请服务类
@@ -52,6 +54,31 @@ class PropertyWarmserviceApplyService extends AbstractService
     public function save(array $data): mixed
     {
         $data['user_id'] = user('xcx')->getId();
+        if (!isset($data['user_name'])) {
+            $data['user_name'] = user('xcx')->getJwt()->getParserData()['nick_name']??'';
+        }
+
+        if (!isset($data['user_phone'])) {
+            $data['user_phone'] = user('xcx')->getJwt()->getParserData()['phone'];
+        }
+        $data['apply_date'] = Carbon::now()->format('Y-m-d');
+
+        if($data['service_type'] == 1) {
+            $ret = $this->mapper->getOne($data);
+            // 每天申请一次
+            if($ret) {
+                throw new MineException('今天已经申请过，无法继续申请', 500);
+            }
+        }
+
+        if($data['service_type'] == 2) {
+            // 每人限制租借5把
+            $param = ['status'=>['0','1','2']];
+            $ret = $this->mapper->counts($param);
+            if($ret >= 5 ) {
+                throw new MineException('每人限制租借5把，无法继续申请', 500);
+            }
+        }
         return $this->mapper->save($data);
     }
 }

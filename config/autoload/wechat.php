@@ -15,7 +15,7 @@ return [
      * true 使用 false 不使用
      */
     'use_stable_access_token' => false,
-
+    'is_open' => env('ISOPEN', 1),
     /**
      * 接口请求相关配置，超时时间等，具体可用参数请参考：
      * https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php
@@ -37,6 +37,20 @@ return [
         //      // (例如. 首次:1000ms; 第二次: 3 * 1000ms; etc.)
         //      'multiplier' => 3
         //  ],
+    ],
+    /*
+     * 微信支付
+     */
+    'payment' => [
+        'default' => [
+            'sandbox'            => env('WECHAT_PAYMENT_SANDBOX', false),
+            'app_id'             => env('WECHAT_PAYMENT_APPID', ''),
+            'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
+            'key'                => env('WECHAT_PAYMENT_KEY', 'key-for-signature'),
+            'cert_path'          => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
+            'key_path'           => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),      // XXX: 绝对路径！！！！
+            'notify_url'         => 'http://example.com/payments/wechat-notify',                           // 默认支付结果通知地址
+        ],
     ],
 ];
 

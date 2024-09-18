@@ -30,6 +30,7 @@ class PropertyReleaseApplyService extends AbstractService
         $params = [
             'orderBy' => 'created_at',
             'orderType' => 'desc',
+            'user_id' => user('xcx')->getId()
         ];
 
         if( isset($data['apply_date']) && filled($data['apply_date'])) {

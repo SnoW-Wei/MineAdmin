@@ -24,6 +24,7 @@ use Mine\MineModel;
 class ParkPropertyWarmserviceRent extends MineModel
 {
     use SoftDeletes;
+    public bool $incrementing = false;
     /**
      * The table associated with the model.
      */

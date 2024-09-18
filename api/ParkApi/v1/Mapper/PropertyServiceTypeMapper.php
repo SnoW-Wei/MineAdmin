@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace Api\ParkApi\v1\Mapper;
 
 use Api\ParkApi\v1\Model\PropertyServiceType;
+use Hyperf\Database\Model\Builder;
 use Mine\Abstracts\AbstractMapper;
 
 /**
@@ -30,6 +31,18 @@ class PropertyServiceTypeMapper extends AbstractMapper
     }
 
     /**
+     * 列表部，不分页
+     * @param array|null $params
+     * @param bool $isScope
+     * @return array
+     */
+    public function getList(?array $params = null, bool $isScope = true) : array
+    {
+        $data = $this->handleSearch($this->model::query(), $params , $isScope)->get()->toArray();
+        return $data;
+    }
+
+    /**
      * 通过父ID列表获取服务类型.
      */
     public function getTypesById(int $id): array
@@ -40,5 +53,20 @@ class PropertyServiceTypeMapper extends AbstractMapper
             ->where('status', $this->model::ENABLE)
             ->orderBy('sort', 'desc')
             ->get()->toArray();
+    }
+
+    /**
+     * 搜索处理器
+     * @param Builder $query
+     * @param array $params
+     * @return Builder
+     */
+    public function handleSearch(Builder $query, array $params): Builder
+    {
+        if (isset($params['parent_id']) && filled($params['parent_id'])) {
+            $query->where('parent_id', $params['parent_id']);
+        }
+
+        return $query;
     }
 }

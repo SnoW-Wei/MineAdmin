@@ -12,6 +12,8 @@ class PropertyWarmserviceMedical extends MineModel
      *
      * @var string|null
      */
+    public bool $incrementing = false;
+
     protected ?string $table = 'park_property_warmservice_medical';
     /**
      * The attributes that are mass assignable.

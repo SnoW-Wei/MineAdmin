@@ -68,6 +68,6 @@ class ServiceApplyController extends BaseController
     #[GetMapping('property/apply')]
     public function index(PropertyServiceApplyRequest $request):ResponseInterface
     {
-        return $this->success($this->propertyServiceApplyService->getPageList($request->all()));
+        return $this->success($this->propertyServiceApplyService->getApplyList($request->all()));
     }
 }

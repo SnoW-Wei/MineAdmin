@@ -52,6 +52,26 @@ class PropertyWarmserviceApplyMapper extends AbstractMapper
     }
 
     /**
+     * @param array $params
+     * @return Builder|\Hyperf\Database\Model\Model
+     */
+    public function getOne(array $params)
+    {
+        $query = $this->handleSearch($this->model::query(),$params);
+        return $query->first();
+    }
+
+    /**
+     * @param array $params
+     * @return int
+     */
+    public function counts(array $params):int
+    {
+        $query = $this->handleSearch($this->model::query(),$params);
+        return $query->count();
+    }
+
+    /**
      * 搜索处理器
      * @param Builder $query
      * @param array $params
@@ -67,6 +87,20 @@ class PropertyWarmserviceApplyMapper extends AbstractMapper
             $query->orderBy($params['orderBy'],$orderType);
         }
 
+        if (isset($params['apply_date']) && filled($params['apply_date'])) {
+            $orderType = filled($params['apply_date'])? $params['apply_date']:'';
+            $query->where('apply_date',$orderType);
+        }
+
+        if (isset($params['service_type']) && filled($params['service_type'])) {
+            $query->where('service_type',$params['service_type']);
+        }
+
+        if (isset($params['status']) && filled($params['status'])) {
+            $query->whereIn('status',$params['status']);
+        }
+
+        $query->whereNull('deleted_at');
         return $query;
     }
 }

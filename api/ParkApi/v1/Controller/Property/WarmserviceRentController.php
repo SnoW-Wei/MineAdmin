@@ -6,6 +6,7 @@ namespace Api\ParkApi\v1\Controller\Property;
 
 use Api\ParkApi\v1\Request\PropertyWarmserviceRentRequest;
 use Hyperf\HttpServer\Annotation\GetMapping;
+use Hyperf\HttpServer\Annotation\PostMapping;
 use Api\ParkApi\v1\Controller\BaseController;
 use Api\ParkApi\v1\Service\PropertyWarmserviceRentService;
 use Hyperf\Di\Annotation\Inject;
