@@ -21,6 +21,7 @@ use Mine\Event\UserLoginBefore;
 use Mine\Event\UserLogout;
 use Mine\Exception\NormalStatusException;
 use Mine\Exception\UserBanException;
+use Mine\Exception\NoPermissionException;
 use Mine\Helper\MineCode;
 use Mine\Interfaces\UserServiceInterface;
 use Mine\Vo\UserServiceVo;
@@ -48,6 +49,18 @@ class UserAuthService implements UserServiceInterface
             $userinfo = $mapper->checkUserByUsername($userServiceVo->getUsername());
             $userinfo->scene = 'admin';
             $userLoginAfter = new UserLoginAfter($userinfo->toArray());
+            $redis = redis();
+            $key = 'login_'.$userServiceVo->getUsername();
+            // 登陆次数限制
+            $redis = redis();
+            $key = 'login_'.$userServiceVo->getUsername();
+            if ($data = $redis->get($key)) {
+                if($data >=5) {
+                    $redis->set($key,$data,600);
+                    $userLoginAfter->message = t('jwt.limit_times');
+                    throw new NoPermissionException();
+                }
+            }
             if ($mapper->checkPass($userServiceVo->getPassword(),$userinfo->password)) {
                 if (
                     ($userinfo->status == SystemUser::USER_NORMAL)
@@ -63,6 +76,12 @@ class UserAuthService implements UserServiceInterface
                 $userLoginAfter->message = t('jwt.user_ban');
                 event($userLoginAfter);
                 throw new UserBanException();
+            } else {
+                if ($data) {
+                    $redis->set($key,$data+1,300);
+                } else {
+                    $redis->set($key,1,300);
+                }
             }
             $userLoginAfter->loginStatus = false;
             $userLoginAfter->message = t('jwt.login_error');
@@ -77,6 +96,9 @@ class UserAuthService implements UserServiceInterface
             }
             if ($e instanceof UserBanException) {
                 throw new NormalStatusException(t('jwt.user_ban'), MineCode::USER_BAN);
+            }
+            if ($e instanceof NoPermissionException) {
+                throw new NormalStatusException(t('jwt.limit_times'), MineCode::NO_PERMISSION);
             }
             console()->error($e->getMessage());
             throw new NormalStatusException(t('jwt.unknown_error'));

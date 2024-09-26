@@ -212,7 +212,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
     /**
      * 初始化用户密码
      */
-    public function initUserPassword(int $id, string $password = '123456'): bool
+    public function initUserPassword(int $id, string $password = 'Qweasd123'): bool
     {
         return $this->mapper->initUserPassword($id, $password);
     }

@@ -34,7 +34,7 @@ class SystemUserRequest extends MineFormRequest
     {
         return [
             'username' => 'required|max:20',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/u',
             'phone' => 'phone_number',
             'email' => 'email',
             'dept_ids' => 'required',
@@ -78,7 +78,7 @@ class SystemUserRequest extends MineFormRequest
     public function modifyPasswordRules(): array
     {
         return [
-            'newPassword' => 'required|confirmed|string',
+            'newPassword' => 'required|confirmed|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/u',
             'newPassword_confirmation' => 'required|string',
             'oldPassword' => ['required', function ($attribute, $value, $fail) {
                 $service = $this->container->get(SystemUserService::class);

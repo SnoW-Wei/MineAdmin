@@ -30,4 +30,5 @@ return [
     'code_error' => '验证码错误或已失效',
     'unknown_error' => '未知错误',
     'unknown' => '未知',
+    'limit_times' => '同一用户登陆失败5次，锁定10分钟',
 ];

@@ -30,4 +30,5 @@ return [
     'code_error' => 'Verification code error or expired',
     'unknown_error' => 'unknown error',
     'unknown' => 'unknown',
+    'limit_times' => 'lock 5 minutes',
 ];

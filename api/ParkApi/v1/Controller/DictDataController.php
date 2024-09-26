@@ -45,14 +45,14 @@ class DictDataController extends MineController
             {
                 case 'property_service_type':
                     $param['select'] = 'id,name';
-                    $ret =  $this->propertyServiceType->getList($param);
+                    $ret =  $this->propertyServiceType->getList($param,false);
                     break;
                 case 'industrial_service_category';
                     $param['select'] = 'id,name';
-                    $ret =  $this->industrialCategoryService->getList($param);
+                    $ret =  $this->industrialCategoryService->getList($param,false);
                     break;
                 default:
-                    $ret = $this->service->getList(['code'=>$value]);
+                    $ret = $this->service->getList(['code'=>$value],false);
                     break;
             }
             $return[$value] = $ret;
