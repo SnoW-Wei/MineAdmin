@@ -141,7 +141,7 @@ class SystemUserRequest extends MineFormRequest
             'password' => '用户密码',
             'dashboard' => '用户后台首页',
             'oldPassword' => '旧密码',
-            'newPassword' => '新密码',
+            'newPassword' => '新密码 大小写字母+数字达到8位或以上',
             'newPassword_confirmation' => '确认密码',
             'status' => '用户状态',
             'dept_ids' => '部门ID',

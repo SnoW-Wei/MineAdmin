@@ -97,3 +97,8 @@ git merge upstream/main
 鼠标移动到后台右上角的头像，点击 清除缓存 更新用户的菜单数据，刷新浏览器，看是否显示新增的菜单
 点击新增的菜单，看页面是否显示，如果不显示，请重启前端
 ```
+### 部署
+```angular2html
+1、修改web config/upload.js 中 LOCAL 地址
+2、
+```

@@ -102,7 +102,10 @@ class LoginController extends MineController
     #[GetMapping('getBingBackgroundImage')]
     public function getBingBackgroundImage(): ResponseInterface
     {
-        try {
+        return $this->success([
+            'url' => './bg.jpeg',
+        ]);
+        /*try {
             $response = file_get_contents('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1');
             $content = json_decode($response);
             if (! empty($content?->images[0]?->url)) {
@@ -113,6 +116,6 @@ class LoginController extends MineController
             throw new \Exception();
         } catch (\Exception $e) {
             return $this->error('获取必应背景失败');
-        }
+        }*/
     }
 }
