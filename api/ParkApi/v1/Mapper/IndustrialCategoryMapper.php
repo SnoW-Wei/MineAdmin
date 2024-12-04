@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Api\ParkApi\v1\Mapper;
 
-use Api\ParkApi\v1\Model\industrialCategory;
+use Api\ParkApi\v1\Model\IndustrialCategory;
 use Hyperf\Database\Model\Builder;
 use Mine\Abstracts\AbstractMapper;
 
@@ -12,13 +12,13 @@ use Mine\Abstracts\AbstractMapper;
 class IndustrialCategoryMapper extends AbstractMapper
 {
     /**
-     * @var industrialCategory
+     * @var IndustrialCategory
      */
     public $model;
 
     public function assignModel()
     {
-        $this->model = industrialCategory::class;
+        $this->model = IndustrialCategory::class;
     }
 
     /**

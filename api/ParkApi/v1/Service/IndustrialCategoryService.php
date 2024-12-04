@@ -11,11 +11,11 @@ use Mine\Abstracts\AbstractService;
 class IndustrialCategoryService extends AbstractService
 {
     /**
-     * @var industrialCategoryMapper
+     * @var IndustrialCategoryMapper
      */
     public $mapper;
 
-    public function __construct(industrialCategoryMapper $mapper)
+    public function __construct(IndustrialCategoryMapper $mapper)
     {
         $this->mapper = $mapper;
     }

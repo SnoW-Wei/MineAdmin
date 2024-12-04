@@ -6,7 +6,7 @@ namespace Api\ParkApi\v1\Controller;
 
 use Api\ParkApi\v1\Service\SystemDictDataService;
 use Api\ParkApi\v1\Service\PropertyServiceTypeService;
-use Api\ParkApi\v1\Service\industrialCategoryService;
+use Api\ParkApi\v1\Service\IndustrialCategoryService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -29,7 +29,7 @@ class DictDataController extends MineController
     protected PropertyServiceTypeService $propertyServiceType;
 
     #[Inject]
-    protected industrialCategoryService $industrialCategoryService;
+    protected IndustrialCategoryService $industrialCategoryService;
     /**
      * 快捷查询一个字典.
      * @throws ContainerExceptionInterface
