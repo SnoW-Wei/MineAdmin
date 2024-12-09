@@ -8,6 +8,11 @@ php watch -c
 ##### 正式环境
 ```
 php bin/hyperf.php start
+nohup php bin/hyperf.php start > /dev/null 2>&1 &
+
+重启
+cat runtime/hyperf.pid
+kill -SIGTERM xxx
 ```
 
 ##### 目录结构
